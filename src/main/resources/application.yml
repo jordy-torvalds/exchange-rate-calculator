@@ -1,0 +1,13 @@
+logging:
+  level:
+    org:
+      springframework:
+        web: debug
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    suffix: .html
+
+currency-layer:
+  key: c6195fba122e10f1a2757d91757325ec
