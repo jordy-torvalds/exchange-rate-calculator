@@ -1,4 +1,4 @@
-package com.jordytech.exchangeratecalculate;
+package com.jordy.app.exchangeratecalculrate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

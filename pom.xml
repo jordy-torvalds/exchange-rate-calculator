@@ -8,8 +8,8 @@
 		<version>2.4.4-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.jordy-tech</groupId>
-	<artifactId>exchange-rate-calculate</artifactId>
+	<groupId>com.jordy.app</groupId>
+	<artifactId>exchangeratecalculator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>exchange-rate-calculate</name>
 	<description>Web applications that calculate exchange rates</description>
