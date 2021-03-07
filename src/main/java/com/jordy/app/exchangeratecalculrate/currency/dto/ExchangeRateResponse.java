@@ -3,6 +3,7 @@ package com.jordy.app.exchangeratecalculrate.currency.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class ExchangeRateResponse {
 
     // 응답 성공 여부

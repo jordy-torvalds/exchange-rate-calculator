@@ -21,8 +21,9 @@ spring:
 spring:
   profiles:
     active: prod
+
 currency-layer:
-  key: c6195fba122e10f1a2757d91757325ec
+  access-key: c6195fba122e10f1a2757d91757325ec
 
 
 
