@@ -53,7 +53,7 @@ class ApiExchangeRateClientTest {
     }
 
     @Test
-    @DisplayName("ApiExchangeRateClient 로 정상적으로 조회되는지 확인")
+    @DisplayName("ApiExchangeRateClient 의 api 통신이 정상적으로 되는지 확인")
     void checkCommunicationWithExchangeRateServer() throws UnsupportedEncodingException{
 
         // Given
