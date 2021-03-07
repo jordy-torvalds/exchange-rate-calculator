@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,19 +33,36 @@ class ApiExchangeRateClientTest {
         assertEquals(ApiExchangeRateClient.class, exchangeRateClient.getClass());
     }
 
+    @Test
+    @DisplayName("ApiExchangeRateClient 로 조회한 값의 정상 여부 확인")
+    void retrieveExchangeRate() throws UnsupportedEncodingException {
+        // Given (skip)
+
+        // When
+        ExchangeRateResponse exchangeRateResponse = exchangeRateClient.retrieveExchangeRate();
+        Map<String, BigDecimal> quotes = exchangeRateResponse.getQuotes();
+
+        // Then
+        assertThat(exchangeRateResponse.isSuccess()).isTrue();
+        assertThat(exchangeRateResponse.getSource()).isEqualTo("USD");
+
+        Set<String> quotesKeySet= quotes.keySet();
+        assertThat(quotesKeySet.contains("USDKRW")).isTrue();
+        assertThat(quotesKeySet.contains("USDJPY")).isTrue();
+        assertThat(quotesKeySet.contains("USDPHP")).isTrue();
+    }
 
     @Test
-    @DisplayName("ApiExchangeRateClient로 정상적으로 조회되는지 확인")
+    @DisplayName("ApiExchangeRateClient 로 정상적으로 조회되는지 확인")
     void checkCommunicationWithExchangeRateServer() throws UnsupportedEncodingException{
 
-        // Given (skip)
+        // Given
         ApiExchangeRateClient apiExchangeRateClient = (ApiExchangeRateClient) exchangeRateClient;
 
         // When
-        ResponseEntity<ExchangeRateResponse> responseEntity = apiExchangeRateClient.requestToCurrencyLayer();
+        ResponseEntity<String> responseEntity = apiExchangeRateClient.requestToCurrencyLayer();
 
         // Then
-        assertThat(responseEntity.getBody().isSuccess()).isTrue();
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         log.info(responseEntity.getBody().toString());
     }
