@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: default
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    suffix: .html
+
+logging:
+  level:
+    org:
+      springframework:
+        web: debug
+
+---
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles:
+    active: prod
+
+currency-layer:
+  access-key: c6195fba122e10f1a2757d91757325ec
+
+
+

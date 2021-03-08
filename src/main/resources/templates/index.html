@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>환율 계산기</title>
+    <style>
+        .wd105 {
+            width: 105px;
+        }
+
+        .wd120 {
+            width: 120px;
+        }
+
+        .common-div-block {
+             margin-top: 10px;
+        }
+
+        .receive-money-block {
+             margin-top: 27px;
+             font-size: 20px;
+             display: none;
+        }
+
+        .receive-money-block.hide {
+             display: none;
+        }
+
+        .receive-money-block.show {
+             display: none;
+        }
+
+    </style>
+</head>
+<body>
+<h1> 환율 계산 </h1>
+<div class="common-div-block">송금국가: 미국(USD)</div>
+<div class="common-div-block">
+    수취국가:
+    <select class="wd105">
+        <option>한국(KRW)</option>
+        <option>일본(JPY)</option>
+        <option>필리핀(PHP)</option>
+    </select>
+</div>
+<div class="common-div-block">환율: <span id="span_exchange_rate"><span></span></span></div>
+<div class="common-div-block">송금액: <input type="text" id="txt_sending_money" style="width:130px" th:value="${currency}"> USD</div>
+<div class="common-div-block"> <input type="button" id="btn_submit" value="submit" class="wd120"></div>
+<div class="receive-money-block deactivated">수취금액은 <span id="span_receive_money"> </span> <span id="span_selected_receive_country"></span> 입니다.</div>
+</body>
+</html>
