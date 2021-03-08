@@ -6,13 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor
 @ToString
 public class ExchangeRateResponse {
+    private static final String SENDING_CURRENCY_SPECIES = "USD";
+    private static final int DECIMAL_POINT = 2;
 
     // 응답 성공 여부
     private boolean success;
@@ -40,5 +44,12 @@ public class ExchangeRateResponse {
         this.timestamp = timestamp;
         this.source = source;
         this.quotes = quotes;
+    }
+
+    public BigDecimal retrieveExchangeRate(String currencySpecies) {
+        Optional<BigDecimal> exchangeRateOptional = Optional.ofNullable(quotes.get(SENDING_CURRENCY_SPECIES + currencySpecies));
+        if (exchangeRateOptional.isEmpty() == true)
+            return BigDecimal.ZERO;
+        return exchangeRateOptional.get().setScale(DECIMAL_POINT, RoundingMode.FLOOR);
     }
 }

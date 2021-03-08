@@ -31,11 +31,16 @@ public class ApiExchangeRateClient implements ExchangeRateClient{
     private ObjectMapper objectMapper;
 
     @Override
-    public ExchangeRateResponse retrieveExchangeRate() throws UnsupportedEncodingException{
+    public ExchangeRateResponse retrieveExchangeRate() {
         final ResponseEntity<String> respEntity = requestToCurrencyLayer();
-        final String body = respEntity.getBody();
-        ExchangeRateResponse exchangeRateResponse;
+        String body;
+        if(respEntity.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR)
+            body = "{\"success\" : false}";
+        else {
+            body = respEntity.getBody();
+        }
 
+        ExchangeRateResponse exchangeRateResponse;
         try {
             exchangeRateResponse = objectMapper.readValue(body, ExchangeRateResponse.class);
         } catch (JsonProcessingException e) {
@@ -45,7 +50,7 @@ public class ApiExchangeRateClient implements ExchangeRateClient{
         return exchangeRateResponse;
     }
 
-    protected ResponseEntity<String> requestToCurrencyLayer() throws UnsupportedEncodingException {
+    protected ResponseEntity<String> requestToCurrencyLayer() {
         final String decodedAccessKey = URLDecoder.decode(accessKey, DEFAULT_CHARSET);
         final RestTemplate restTemplate = new RestTemplate();
         final HttpHeaders headers = new HttpHeaders();
