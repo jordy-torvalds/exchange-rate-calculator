@@ -15,7 +15,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @ToString
 public class ExchangeRateResponse {
-    private static final String SENDING_CURRENCY_SPECIES = "USD";
+    private static final String SENDING_CURRENCY_KIND = "USD";
     private static final int DECIMAL_POINT = 2;
 
     // 응답 성공 여부
@@ -46,8 +46,8 @@ public class ExchangeRateResponse {
         this.quotes = quotes;
     }
 
-    public BigDecimal retrieveExchangeRate(String currencySpecies) {
-        Optional<BigDecimal> exchangeRateOptional = Optional.ofNullable(quotes.get(SENDING_CURRENCY_SPECIES + currencySpecies));
+    public BigDecimal retrieveExchangeRate(String currencyKind) {
+        Optional<BigDecimal> exchangeRateOptional = Optional.ofNullable(quotes.get(SENDING_CURRENCY_KIND + currencyKind));
         if (exchangeRateOptional.isEmpty() == true)
             return BigDecimal.ZERO;
         return exchangeRateOptional.get().setScale(DECIMAL_POINT, RoundingMode.FLOOR);

@@ -31,15 +31,15 @@ public class CurrencyService {
         return null;
     }
 
-    public CurrencyResponse retrieveExchangeRate(String currencySpecies) {
+    public CurrencyResponse retrieveExchangeRate(String currencyKinds) {
         ExchangeRateResponse exchangeRateResponse = exchangeRateClient.retrieveExchangeRate();
-        BigDecimal exchangeRate = exchangeRateResponse.retrieveExchangeRate(currencySpecies);
+        BigDecimal exchangeRate = exchangeRateResponse.retrieveExchangeRate(currencyKinds);
 
         if(exchangeRateResponse.isSuccess() == false)
             return new CurrencyResponse();
         else if ( exchangeRate.equals(BigDecimal.ZERO))
             return new CurrencyResponse(false, exchangeRate);
 
-        return new CurrencyResponse(true, exchangeRateResponse.retrieveExchangeRate(currencySpecies));
+        return new CurrencyResponse(true, exchangeRateResponse.retrieveExchangeRate(currencyKinds));
     }
 }

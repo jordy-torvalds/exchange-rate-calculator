@@ -29,14 +29,14 @@ class CurrencyRestControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-    
+
     @ParameterizedTest
     @ValueSource(strings = {"KRW", "JPY", "PHP"}) /* Given */
     @DisplayName("수취대상 별 환율 조회 테스트")
-    void exchangeRateByCase(String currencySpecies) throws Exception {
+    void exchangeRateByCase(String currencyKind) throws Exception {
 
         /* When, Then */
-        mockMvc.perform(get("/api/currency/exchange-rate").param("currencySpecies", currencySpecies))
+        mockMvc.perform(get("/api/currency/exchange-rate").param("currencyKind", currencyKind))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
@@ -45,11 +45,11 @@ class CurrencyRestControllerTest {
     @DisplayName("유효하지 않은 환율 조회 요청")
     void exchangeRateByCase_IllegalArgument() throws Exception {
         // Given
-        final String currencySpecies = "ZZZ";
+        final String currencyKind = "ZZZ";
         final int DECIMAL_POINT = 2;
 
         /* When, Then */
-        mockMvc.perform(get("/api/currency/exchange-rate").param("currencySpecies", currencySpecies))
+        mockMvc.perform(get("/api/currency/exchange-rate").param("currencyKind", currencyKind))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(false))
                 .andExpect(jsonPath("$.amount").value(BigDecimal.ZERO.setScale(DECIMAL_POINT, RoundingMode.FLOOR)))

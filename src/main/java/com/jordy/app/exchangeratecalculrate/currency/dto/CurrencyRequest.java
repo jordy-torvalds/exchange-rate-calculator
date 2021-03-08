@@ -13,7 +13,7 @@ import javax.validation.constraints.Positive;
 public class CurrencyRequest {
 
     @NotBlank(message = "수취화폐종을 입력 해주세요.")
-    private String receivedCurrencySpecies;
+    private String receivedCurrencyKinds;
 
     @Positive(message = "송금액은 $0 ~ $10,000 를 입력해주세요.")
     @Max(value = 10000, message = "송금액은 $0 ~ $10,000 를 입력해주세요.")

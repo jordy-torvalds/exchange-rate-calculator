@@ -16,7 +16,7 @@ public class CurrencyRestController {
     private final CurrencyService currencyService;
 
     @GetMapping("/exchange-rate")
-    public CurrencyResponse exchangeRate(@RequestParam(value = "currencySpecies", required = false) String currencySpecies) {
-        return currencyService.retrieveExchangeRate(currencySpecies);
+    public CurrencyResponse exchangeRate(@RequestParam(value = "currencyKind", required = false) String currencyKind) {
+        return currencyService.retrieveExchangeRate(currencyKind);
     }
 }
