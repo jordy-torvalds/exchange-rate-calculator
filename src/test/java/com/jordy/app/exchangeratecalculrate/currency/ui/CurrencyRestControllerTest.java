@@ -29,14 +29,7 @@ class CurrencyRestControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-    //currencySpecies
-
-    // 1) 배열 값 주입
-    // 2) 모킹(실제 조회 X)
-    /*
-            given(currencyApplication.calculateCurrency(any(CurrencyRequest.class)))
-                .willReturn(response);
-     */
+    
     @ParameterizedTest
     @ValueSource(strings = {"KRW", "JPY", "PHP"}) /* Given */
     @DisplayName("수취대상 별 환율 조회 테스트")
@@ -59,7 +52,7 @@ class CurrencyRestControllerTest {
         mockMvc.perform(get("/api/currency/exchange-rate").param("currencySpecies", currencySpecies))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(false))
-                .andExpect(jsonPath("$.amount").value(BigDecimal.ZERO.setScale(2, RoundingMode.FLOOR)))
+                .andExpect(jsonPath("$.amount").value(BigDecimal.ZERO.setScale(DECIMAL_POINT, RoundingMode.FLOOR)))
                 .andDo(print());
     }
 }
